@@ -2,6 +2,8 @@ package io.github.binishmanandhar23.horizontalcalendarx.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
@@ -178,7 +180,9 @@ class HorizontalCalendarView : FrameLayout {
 
         calendarDates.observeForever {
             calendarAdapter.changeCalendarData(it)
-            listener.onItemPressed(calendarAdapter, AppUtil.goToCurrentDate(calendarDates.value?: ArrayList()))
+            Handler(Looper.getMainLooper()).postDelayed({
+                listener.onItemPressed(calendarAdapter, AppUtil.goToCurrentDate(calendarDates.value?: ArrayList()))
+            },500)
         }
     }
 
